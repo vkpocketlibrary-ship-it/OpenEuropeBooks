@@ -133,9 +133,9 @@
 
   /* ── CLICKABLE TITLE ── */
   .header-title {
-    display: inline-block;
+    display: block;
     font-family: 'Playfair Display', serif;
-    font-size: 2rem;
+    font-size: clamp(1.2rem, 5vw, 2rem);
     font-weight: 700;
     color: var(--green);
     letter-spacing: 0.01em;
@@ -146,6 +146,7 @@
     text-decoration: none;
     transition: color 0.2s ease, text-shadow 0.2s ease;
     cursor: pointer;
+    padding-right: 90px; /* leave space for QR code */
   }
 
   .header-title:hover {
@@ -169,18 +170,19 @@
   /* ── NAME — BLACK on white pill ── */
   .name {
     font-family: 'Playfair Display', serif;
-    font-size: 1.3rem;
+    font-size: clamp(1rem, 4vw, 1.3rem);
     font-weight: 700;
     color: var(--black);
     line-height: 1.2;
     position: relative;
     z-index: 1;
     letter-spacing: 0.03em;
-    display: inline-block;
+    display: block;
     background: transparent;
     padding: 0;
     border-radius: 0;
     margin-top: 0.1rem;
+    padding-right: 90px;
   }
 
   .name em {
@@ -286,12 +288,19 @@
     letter-spacing: 0.3em;
   }
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
 <body>
 <div class="card">
 
   <div class="header">
     <div class="header-bar"></div>
+    <!-- QR Code top-right corner -->
+    <div id="qrcode-container" style="position:absolute; top:14px; right:14px; z-index:3;
+         background:white; padding:4px; border-radius:4px;
+         box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
+      <div id="qrcode"></div>
+    </div>
     <div class="logo-row">
 
       <!-- IndiviDUAL bœks™ lightbulb logo -->
@@ -420,5 +429,15 @@
     <a href="http://bit.ly/oeBookPersonas" target="_blank" rel="noopener noreferrer" title="View oeBook Personas slide deck" style="font-family:'DM Mono',monospace; font-size:0.7rem; font-weight:700; letter-spacing:0.15em; color:#16a34a; text-decoration:none; text-transform:uppercase; transition:color 0.2s;" onmouseover="this.style.color='#22c55e'" onmouseout="this.style.color='#16a34a'">PERSONAS</a>
   </div>
 </div>
+<script>
+  new QRCode(document.getElementById("qrcode"), {
+    text: "https://vkpocketlibrary-ship-it.github.io/OpenEuropeBooks/business_card_v5.html",
+    width: 72,
+    height: 72,
+    colorDark: "#1a2e1a",
+    colorLight: "#ffffff",
+    correctLevel: QRCode.CorrectLevel.M
+  });
+</script>
 </body>
 </html>
